@@ -97,9 +97,34 @@ Car.prototype.fill = function(gallons){
   return this.tank = this.tank + gallons;
 }
 
-// const myCorolla = new Car('Corolla', 20);
-// console.log(myCorolla);
-// console.log(myCorolla.fill(20));
+Car.prototype.drive = function(distance){
+  // console.log(`Going to drive ${distance} miles today!`);
+  
+  const odometerBefore = this.odometer;
+  // console.log('My odometer before: ', odometerBefore);
+
+  const tankBefore = this.tank;
+  // console.log('My tank before: ', tankBefore);
+
+  const maxDistance = tankBefore * this.milesPerGallon;
+  // console.log('The max distance i can drive: ', maxDistance);
+
+  this.odometer += distance;
+
+  if (distance > maxDistance){
+    this.odometer = odometerBefore + maxDistance;
+    this.tank = 0;
+    // console.log('My odometer after: ', this.odometer);
+    console.log(`I ran out of fuel at ${maxDistance} miles!`);
+  } else {
+    this.tank = tankBefore - (distance / this.milesPerGallon);
+  }
+}
+
+const myCorolla = new Car('Corolla', 10);
+// myCorolla.fill(9);
+// myCorolla.drive(80);
+// myCorolla.drive(20);
 
 /*
   TASK 3
@@ -128,10 +153,11 @@ Baby.prototype.play = function(){
 /* 
   TASK 4
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+    There are 4 different use-cases that influence what "this" will refer to:
+  1. Window Binding - if you use "this" incorrectly, without giving it any context (so that no rules apply), it will reference the entire window (unless you are in strict mode). 
+  2. Implicit Binding - the most common use of "this," implicit binding refers to when it is used within a function and its context is direct and clear. When you invoke the function in question here, simply look to the left of dot before the function name to see what "this" will reference. 
+  3. Explicit Binding - you are able to directly connect "this" to something using the "call," "apply," or "bind," methods. Each of these 3 methods have their own use cases and rules, but in all 3 you are able to manipulate "this" to refer to something different.
+  4. New Binding - you can use Constructor functions to create new objects in your data! In this case, "this" is used to refer to each individual new object, within itself.
 */
 
 
