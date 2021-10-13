@@ -28,7 +28,7 @@ Airplane.prototype.land = function () {
 
 /*
   TASK 1
-    - Write a Person Constructor that initializes `name` and `age` from arguments.
+    - Write a Person Constructor that initializes `name` and `age` from arguments. <<initializes from arguments, use method 1
     - All instances of Person should initialize with an empty `stomach` array.
     - Give instances of Person the ability to `.eat("someFood")`:
         + When eating an edible, it should be pushed into the `stomach`.
@@ -39,15 +39,38 @@ Airplane.prototype.land = function () {
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-function Person() {
-  
+function Person (name, age){
+  this.name = name;
+  this.age = age;
+  this.stomach = [];
 }
 
+Person.prototype.eat = function(edible){
+  if (this.stomach.length < 10){
+    this.stomach.push(edible);
+  }
+}
 
+Person.prototype.poop = function(){
+  this.stomach = [];
+}
 
+Person.prototype.toString = function(){
+  return `${this.name}, ${this.age}`;
+}
 
+// const morgan = new Person ('Morgan', 26);
 
-
+// morgan.eat('pizza');
+// morgan.eat('ramen');
+// morgan.eat('ice cream');
+// morgan.eat('tacos');
+// morgan.eat('sandwich');
+// morgan.eat('cake');
+// morgan.eat('apple');
+// console.log('Morgans stomach:', morgan.stomach);
+// console.log(morgan.poop());
+// console.log('Morgans stomach after using bathroom: ', morgan.stomach);
 
 /*
   TASK 2
